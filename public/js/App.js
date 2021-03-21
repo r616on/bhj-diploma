@@ -55,6 +55,7 @@ class App {
       newIncome: new Modal(document.querySelector("#modal-new-income")),
       newExpense: new Modal(document.querySelector("#modal-new-expense")),
     };
+    // console.log(this.modals);
   }
 
   /**
