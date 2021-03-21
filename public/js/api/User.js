@@ -27,6 +27,7 @@ class User {
   static unsetCurrent() {
     localStorage.removeItem([this.currentUser]);
 
+
   }
 
   /**
@@ -34,9 +35,13 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    const corrent = localStorage[this.currentUser];
-    return corrent
-
+    let currentObj = localStorage[this.currentUser];
+    if (currentObj) {
+      currentObj = JSON.parse(currentObj);
+    } else {
+      return undefined
+    };
+    return currentObj
   }
 
   /**
@@ -44,7 +49,43 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
+    // if (this.current()) {
 
+    // } else {
+    //   const errorObj = {
+    //     "success": false,
+    //     "error": "Необходима авторизация"
+    //   };
+
+    //   return errorObj
+    // }
+
+
+    // createRequest({
+    //   url: this.URL + '/current',
+    //   method: 'GET',
+    //   responseType: 'json',
+    //   callback: (err, response) => {
+    //     if (response && response.user) {
+    //       this.setCurrent(response.user);
+    //     }
+    //     callback(err, response);
+    //   }
+    // });
+
+
+
+
+    //   {
+    //     "success": true,
+    //     "user": {
+    //         "id": 2,
+    //         "name": "Vlad",
+    //         "email": "l@l.one",
+    //         "created_at": "2019-03-06 18:46:41",
+    //         "updated_at": "2019-03-06 18:46:41"
+    //     }
+    // }
   }
 
   /**
@@ -87,16 +128,16 @@ class User {
   }
 }
 
-const user = {
-  id: 12,
-  name: 'Vladal'
-};
+// const user = {
+//   id: 12,
+//   name: 'Vladal'
+// };
 
-User.setCurrent(user);
-const current = User.current();
+// User.setCurrent(user);
+// let current = User.current();
 
-console.log(current); // объект { id: 12, name: 'Vlad' }
+// console.log(current); // объект { id: 12, name: 'Vlad' }
 
-User.unsetCurrent();
-
-console.log(current);
+// User.unsetCurrent();
+// current = User.current();
+// console.log(current);
