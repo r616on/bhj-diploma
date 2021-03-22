@@ -1,61 +1,73 @@
+
+
 /**
  * Основная функция для совершения запросов
  * на сервер.
  * */
 const createRequest = (options = {}) => {
-   let response = {};
+   const xhr = new XMLHttpRequest();
+   const method = options.method;
+   const url = options.url;
+   let response;
    let err;
-   if (options.method === "GET") {
-      const xhr = new XMLHttpRequest;
-      let get = "";
+   if (method === "GET") {
+      let getBody = "";
       let i = 0;
       for (let key in options.data) {
          i++;
-         get = get + `${key}:${options.data[key]}`
+         getBody = getBody + `${key}:${options.data[key]}`
          if (i < Object.keys(options.data).length) {
-            get = get + "&";
+            getBody = getBody + "&";
          }
       };
       try {
-         xhr.open('GET', `${options.url}?${get}`);
-         xhr.send()
-      }
-      catch (e) {
+         xhr.open(method, `${url}?${get}`);
+         xhr.responseType = (options.responseType || "json");
+         xhr.onload = () => {
+            if (xhr.status >= 400) {
+               console.error(xhr.response);
+            } else {
+               response = xhr.response;
+            };
+         };
+         xhr.onerror = () => console.log(xhr.response);
+         xhr.send();
+      } catch (e) {
          err = e;
-      }
-      xhr.onreadystatechange = function () {
-         if (xhr.readyState == 4) {
-            response = xhr.responseType;
-         }
+         console.log(e);
       };
 
-
    } else {
-      const xhr = new XMLHttpRequest;
       let formData = new FormData;
       for (let key in options.data) {
          formData.append(`${key}`, `${options.data[key]}`);
       };
+      formData = JSON.stringify(formData);
       try {
-         xhr.open(`${options.method}`, `${options.url}`);
+         xhr.open(method, url);
+         xhr.responseType = (options.responseType || "json")
+         xhr.onload = () => {
+            if (xhr.status >= 400) {
+               console.error(xhr.response);
+            } else {
+               response = xhr.response;
+            };
+         };
+         xhr.onerror = () => console.log(xhr.response);
          xhr.send(formData);
-      }
-      catch (e) {
+      } catch (e) {
          err = e;
-      }
-      xhr.onreadystatechange = function () {
-         if (xhr.readyState == 4) {
-            response = xhr.responseType;
-         }
+         console.log(e);
       };
    };
-   response.withCredentials = true;
+
    options.callback(err, response);
+
 
 };
 
 // createRequest({
-//    url: 'https://example.com',
+//    url: 'http://localhost:8000',
 //    data: {
 //       mail: 'ivan@biz.pro',
 //       password: 'odinodin'
@@ -69,6 +81,66 @@ const createRequest = (options = {}) => {
 //       console.log(response); // ответ
 //    }
 // });
+
+
+
+
+
+
+// const createRequest = (options = {}) => {
+//    let response = {};
+//    let err;
+//    if (options.method === "GET") {
+//       const xhr = new XMLHttpRequest;
+//       let get = "";
+//       let i = 0;
+//       for (let key in options.data) {
+//          i++;
+//          get = get + `${key}:${options.data[key]}`
+//          if (i < Object.keys(options.data).length) {
+//             get = get + "&";
+//          }
+//       };
+//       try {
+//          xhr.open('GET', `${options.url}?${get}`);
+//          xhr.onreadystatechange = function () {
+//             if (xhr.readyState == 4) {
+//                response = xhr.responseType;
+//             }
+//          };
+//          xhr.send()
+//       }
+//       catch (e) {
+//          err=e;
+//console.log(e);
+//       }
+//    } else {
+//       const xhr = new XMLHttpRequest;
+//       let formData = new FormData;
+//       for (let key in options.data) {
+//          formData.append(`${key}`, `${options.data[key]}`);
+//       };
+//       try {
+//          xhr.open(`${options.method}`, `${options.url}`);
+//          xhr.onreadystatechange = function () {
+//             if (xhr.readyState == 4) {
+//                response = xhr.responseType;
+//             }
+//          };
+//          xhr.send(formData);
+//       }
+//       catch (e) {
+//          err=e;
+//console.log(e);
+//       }
+
+//    };
+//    response.withCredentials = true;
+//    options.callback(err, response);
+
+// };
+
+
 
 // {
 //    url: 'https://example.com', // адрес
