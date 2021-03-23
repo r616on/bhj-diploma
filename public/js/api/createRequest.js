@@ -8,8 +8,6 @@ const createRequest = (options = {}) => {
    const xhr = new XMLHttpRequest();
    const method = options.method;
    const url = options.url;
-   let response;
-   let err;
    if (method === "GET") {
       let getBody = "";
       let i = 0;
@@ -23,17 +21,10 @@ const createRequest = (options = {}) => {
       try {
          xhr.open(method, `${url}?${get}`);
          xhr.responseType = (options.responseType || "json");
-         xhr.onload = () => {
-            if (xhr.status >= 400) {
-               console.error(xhr.response);
-            } else {
-               response = xhr.response;
-            };
-         };
+         xhr.onload = respCall;
          xhr.onerror = () => console.log(xhr.response);
          xhr.send();
       } catch (e) {
-         err = e;
          console.log(e);
       };
 
@@ -42,27 +33,28 @@ const createRequest = (options = {}) => {
       for (let key in options.data) {
          formData.append(`${key}`, `${options.data[key]}`);
       };
-      formData = JSON.stringify(formData);
+      // formData = JSON.stringify(formData);
       try {
          xhr.open(method, url);
          xhr.responseType = (options.responseType || "json")
-         xhr.onload = () => {
-            if (xhr.status >= 400) {
-               console.error(xhr.response);
-            } else {
-               response = xhr.response;
-            };
-         };
+         xhr.onload = respCall;
          xhr.onerror = () => console.log(xhr.response);
          xhr.send(formData);
       } catch (e) {
          err = e;
-         console.log(e);
       };
    };
 
-   options.callback(err, response);
-
+   function respCall() {
+      let err;
+      let response;
+      if (xhr.status >= 400) {
+         err = xhr.response;
+      } else {
+         response = xhr.response;
+      };
+      options.callback(err, response);
+   };
 
 };
 

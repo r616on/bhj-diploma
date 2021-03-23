@@ -5,7 +5,7 @@
  * */
 class User {
   constructor() {
-    this.url = "/user";
+    // this.url = "/user";
     this.currentUser = "";
     /**
      * Устанавливает текущего пользователя в
@@ -13,6 +13,7 @@ class User {
      * */
 
   }
+  static url = "/user";
 
   static setCurrent(user) {
     this.currentUser = String(user.name);
