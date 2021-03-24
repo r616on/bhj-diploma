@@ -46,8 +46,8 @@ const createRequest = (options = {}) => {
    };
 
    function respCall() {
-      let err;
-      let response;
+      let err = null;
+      let response = null;
       if (xhr.status >= 400) {
          err = xhr.response;
       } else {
@@ -59,7 +59,7 @@ const createRequest = (options = {}) => {
 };
 
 // createRequest({
-//    url: 'http://localhost:8000',
+//    url: 'https://example.com',
 //    data: {
 //       mail: 'ivan@biz.pro',
 //       password: 'odinodin'

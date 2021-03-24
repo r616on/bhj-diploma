@@ -7,9 +7,8 @@ class Account extends Entity {
   /**
    * Получает информацию о счёте
    * */
-  constructor() {
-    this.url = "/account";
-  }
+
+  static url = "/account";
   static get(id = '', callback) {
     let innerData = {};
     innerData.url = this.url;

@@ -4,20 +4,17 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
-  constructor() {
-    // this.url = "/user";
-    this.currentUser = "";
-    /**
-     * Устанавливает текущего пользователя в
-     * локальном хранилище.
-     * */
 
-  }
+  /**
+   * Устанавливает текущего пользователя в
+   * локальном хранилище.
+   * */
+
+
   static url = "/user";
 
   static setCurrent(user) {
-    this.currentUser = String(user.name);
-    localStorage.setItem([this.currentUser], [JSON.stringify(user)]);
+    localStorage.setItem([user.user], [JSON.stringify(user)]);
     // localStorage[this.currentUser] = JSON.stringify(user);
   }
 
@@ -26,7 +23,7 @@ class User {
    * пользователе из локального хранилища.
    * */
   static unsetCurrent() {
-    localStorage.removeItem([this.currentUser]);
+    //localStorage.removeItem([this.currentUser]);
 
 
   }
@@ -36,13 +33,13 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    let currentObj = localStorage[this.currentUser];
-    if (currentObj) {
-      currentObj = JSON.parse(currentObj);
-    } else {
-      return undefined
-    };
-    return currentObj
+    // let currentObj = localStorage[this.currentUser];
+    // if (currentObj) {
+    //   currentObj = JSON.parse(currentObj);
+    // } else {
+    //   return undefined
+    // };
+    // return currentObj
   }
 
   /**
