@@ -28,6 +28,16 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
+    },
+    {
+      "name": "Аркада",
+      "user_id": "1",
+      "id": "g2pccg2wkmuyflkc"
+    },
+    {
+      "name": "Гонка вооружений",
+      "user_id": "1",
+      "id": "g2pccje4kmuykja1"
     }
   ],
   "transactions": [

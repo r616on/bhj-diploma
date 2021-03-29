@@ -11,8 +11,12 @@ class TransactionsWidget {
    * Если переданный элемент не существует,
    * необходимо выкинуть ошибку.
    * */
-  constructor( element ) {
-
+  constructor(element) {
+    if (element) {
+      this.element = element;
+    } else {
+      throw new Error("Передан пустой элемент!");
+    }
   }
   /**
    * Регистрирует обработчики нажатия на
