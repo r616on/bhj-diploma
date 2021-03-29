@@ -17,7 +17,21 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
+    Account.list([User.current()], (e, response) => {
+      const element = this.element;
 
+      const accSelect = element.querySelector(".accounts-select")
+      const arrSelect = Array.from(accSelect.querySelectorAll("option"));
+      if (arrSelect.length > 0) {
+        arrSelect.forEach((item) => item.remove())
+      };
+      response.data.forEach(item => {
+        let options = document.createElement('option')
+        options.value = item.id;
+        options.innerText = item.name;
+        accSelect.append(options);
+      });
+    })
   }
 
   /**
@@ -27,6 +41,15 @@ class CreateTransactionForm extends AsyncForm {
    * в котором находится форма
    * */
   onSubmit(data) {
-
+    Transaction.create(data, (err, response) => {
+      if (response.success) {
+        App.getModal("newIncome").close();
+        // Вопрос как мы можем вызывать метод close() в данном выражении если он принадлежит не 
+        // App.js а Modal.js ??
+        App.getModal("newExpense").close();
+        App.update();
+        this.element.reset();
+      }
+    })
   }
 }

@@ -38,6 +38,11 @@
       "name": "Гонка вооружений",
       "user_id": "1",
       "id": "g2pccje4kmuykja1"
+    },
+    {
+      "name": "Соревновательный",
+      "user_id": "1",
+      "id": "g2pcc72wkmv1rfra"
     }
   ],
   "transactions": [
@@ -175,6 +180,42 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "g2pcchkskmv1ybl8",
+      "type": "income",
+      "name": "Колым",
+      "sum": 3000,
+      "account_id": "3",
+      "user_id": "1",
+      "created_at": "2021-03-29T20:37:05.707Z"
+    },
+    {
+      "id": "g2pccfc8kmv20qbj",
+      "type": "income",
+      "name": "Аркада",
+      "sum": 3000,
+      "account_id": "3",
+      "user_id": "1",
+      "created_at": "2021-03-29T20:38:58.110Z"
+    },
+    {
+      "id": "g2pcc51skmv254d8",
+      "type": "income",
+      "name": "Аркада",
+      "sum": 3000,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-29T20:42:22.939Z"
+    },
+    {
+      "id": "g2pcc6s8kmv2j5cb",
+      "type": "expense",
+      "name": "Гонка вооружений",
+      "sum": 3000,
+      "account_id": "3",
+      "user_id": "1",
+      "created_at": "2021-03-29T20:53:17.386Z"
     }
   ]
 }
