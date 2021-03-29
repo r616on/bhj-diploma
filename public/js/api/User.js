@@ -11,11 +11,10 @@ class User {
    * */
 
 
-  static url = "/user";
+  static URL = "/user";
 
   static setCurrent(user) {
-    localStorage.setItem([user.user], [JSON.stringify(user)]);
-    // localStorage[this.currentUser] = JSON.stringify(user);
+    localStorage["user"] = [JSON.stringify(user)];
   }
 
   /**
@@ -23,9 +22,7 @@ class User {
    * пользователе из локального хранилища.
    * */
   static unsetCurrent() {
-    //localStorage.removeItem([this.currentUser]);
-
-
+    localStorage.removeItem(["user"]);
   }
 
   /**
@@ -33,13 +30,11 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    // let currentObj = localStorage[this.currentUser];
-    // if (currentObj) {
-    //   currentObj = JSON.parse(currentObj);
-    // } else {
-    //   return undefined
-    // };
-    // return currentObj
+    if (localStorage["user"]) {
+      return JSON.parse(localStorage["user"])
+    } else {
+      return undefined
+    }
   }
 
   /**
@@ -47,44 +42,26 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    // if (this.current()) {
+    createRequest({
+      url: this.URL + '/current',
+      method: 'GET',
+      responseType: 'json',
+      callback: (err, response) => {
 
-    // } else {
-    //   const errorObj = {
-    //     "success": false,
-    //     "error": "Необходима авторизация"
-    //   };
-
-    //   return errorObj
-    // }
-
-
-    // createRequest({
-    //   url: this.URL + '/current',
-    //   method: 'GET',
-    //   responseType: 'json',
-    //   callback: (err, response) => {
-    //     if (response && response.user) {
-    //       this.setCurrent(response.user);
-    //     }
-    //     callback(err, response);
-    //   }
-    // });
-
-
-
-
-    //   {
-    //     "success": true,
-    //     "user": {
-    //         "id": 2,
-    //         "name": "Vlad",
-    //         "email": "l@l.one",
-    //         "created_at": "2019-03-06 18:46:41",
-    //         "updated_at": "2019-03-06 18:46:41"
-    //     }
-    // }
+        if (response && response.user) {
+          this.setCurrent(response.user);
+        } else if (response && !response.success) {
+          this.unsetCurrent();
+          return {
+            "success": false,
+            "error": "Необходима авторизация"
+          }
+        }
+        callback(err, response);
+      }
+    });
   }
+
 
   /**
    * Производит попытку авторизации.
@@ -94,7 +71,7 @@ class User {
    * */
   static login(data, callback) {
     createRequest({
-      url: this.url + "/login",
+      url: this.URL + "/login",
       // url: `/user/login`,
       method: 'POST',
       responseType: 'json',
@@ -115,7 +92,18 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-
+    createRequest({
+      url: this.URL + "/register",
+      method: "POST",
+      responseType: "json",
+      data,
+      callback: (err, response) => {
+        if (response && response.user) {
+          this.setCurrent(response.user);
+        }
+        callback(err, response);
+      },
+    });
   }
 
   /**
@@ -123,20 +111,19 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static logout(data, callback) {
-
+    createRequest({
+      url: this.URL + "/logout",
+      method: "POST",
+      responseType: "json",
+      data,
+      callback: (err, response) => {
+        if (response && response.user) {
+          this.unsetCurrent();
+          return { "success": true }
+        }
+        // callback(err, response);
+      },
+    });
   }
 }
 
-// const user = {
-//   id: 12,
-//   name: 'Vladal'
-// };
-
-// User.setCurrent(user);
-// let current = User.current();
-
-// console.log(current); // объект { id: 12, name: 'Vlad' }
-
-// User.unsetCurrent();
-// current = User.current();
-// console.log(current);

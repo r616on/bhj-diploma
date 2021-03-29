@@ -19,7 +19,7 @@ const createRequest = (options = {}) => {
          }
       };
       try {
-         xhr.open(method, `${url}?${get}`);
+         xhr.open(method, `${url}?${getBody}`);
          xhr.responseType = (options.responseType || "json");
          xhr.onload = respCall;
          xhr.onerror = () => console.log(xhr.response);
