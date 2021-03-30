@@ -25,6 +25,7 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
+    console.log(data);
     let innerData = {};
     innerData.url = this.url;
     innerData.data = data;

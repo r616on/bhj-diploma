@@ -25,12 +25,15 @@ class CreateTransactionForm extends AsyncForm {
       if (arrSelect.length > 0) {
         arrSelect.forEach((item) => item.remove())
       };
-      response.data.forEach(item => {
-        let options = document.createElement('option')
-        options.value = item.id;
-        options.innerText = item.name;
-        accSelect.append(options);
-      });
+      if ((response.success) && (response.data.length > 0)) {
+        response.data.forEach(item => {
+          let options = document.createElement('option')
+          options.value = item.id;
+          options.innerText = item.name;
+          accSelect.append(options);
+        });
+      }
+
     })
   }
 

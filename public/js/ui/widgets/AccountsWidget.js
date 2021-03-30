@@ -118,6 +118,9 @@ class AccountsWidget {
    * */
   renderItem(data) {
     const row = document.querySelector(".accounts-panel");
-    data.forEach((item) => row.append(this.getAccountHTML(item)))
+    if (data && data.length > 0) {
+      data.forEach((item) => row.append(this.getAccountHTML(item)))
+    }
+
   }
 }

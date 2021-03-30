@@ -216,6 +216,51 @@
       "account_id": "3",
       "user_id": "1",
       "created_at": "2021-03-29T20:53:17.386Z"
+    },
+    {
+      "id": "g2pccji4kmvy007d",
+      "type": "income",
+      "name": "Командный бой",
+      "sum": 2323,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T11:34:11.976Z"
+    },
+    {
+      "id": "g2pccik0kmvy0ad5",
+      "type": "expense",
+      "name": "Соревновательный",
+      "sum": 987,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T11:34:25.144Z"
+    },
+    {
+      "id": "g2pccjpwkmvy3yiv",
+      "type": "income",
+      "name": "ffgfg",
+      "sum": 344,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T11:37:16.422Z"
+    },
+    {
+      "id": "g2pccj68kmvy46lt",
+      "type": "expense",
+      "name": "23434",
+      "sum": 987,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T11:37:26.897Z"
+    },
+    {
+      "id": "g2pccgskkmvyzcio",
+      "type": "income",
+      "name": "Роман",
+      "sum": 4500,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T12:01:40.895Z"
     }
   ]
 }

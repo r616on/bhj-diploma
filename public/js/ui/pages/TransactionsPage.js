@@ -1,3 +1,5 @@
+
+
 /**
  * Класс TransactionsPage управляет
  * страницей отображения доходов и
@@ -13,7 +15,7 @@ class TransactionsPage {
   constructor(element) {
     if (element) {
       this.element = element;
-      //this.registerEvents();
+      this.registerEvents();
     } else {
       throw new Error("Передан пустой элемент!");
     }
@@ -33,6 +35,15 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
+    this.element.addEventListener("click", (e) => {
+      const item = e.target;
+      if (item.classList.contains("remove-account")) {
+        this.removeAccount(item.dataset.id);
+      } else if (item.classList.contains("transaction__remove")) {
+        this.removeTransaction(item.dataset.id);
+      }
+    });
+
 
   }
 
@@ -66,7 +77,20 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render(options) {
-    //Account.get()
+    if (options) {
+      localStorage.lastOptions = options;
+      Account.get([options.account_id], (err, response) => {
+        //console.log(response);
+        if (response.success && response.data) {
+          this.renderTitle();
+        }
+      });
+      Transaction.list([options.account_id], (err, response) => {
+        console.log(response);
+      })
+
+    }
+
   }
 
   /**

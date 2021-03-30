@@ -11,7 +11,7 @@ class User {
    * */
 
 
-  static URL = "/user";
+  static url = "/user";
 
   static setCurrent(user) {
     localStorage["user"] = [JSON.stringify(user)];
@@ -43,7 +43,7 @@ class User {
    * */
   static fetch(callback) {
     createRequest({
-      url: this.URL + '/current',
+      url: this.url + '/current',
       method: 'GET',
       responseType: 'json',
       callback: (err, response) => {
@@ -71,7 +71,7 @@ class User {
    * */
   static login(data, callback) {
     createRequest({
-      url: this.URL + "/login",
+      url: this.url + "/login",
       // url: `/user/login`,
       method: 'POST',
       responseType: 'json',
@@ -93,7 +93,7 @@ class User {
    * */
   static register(data, callback) {
     createRequest({
-      url: this.URL + "/register",
+      url: this.url + "/register",
       method: "POST",
       responseType: "json",
       data,
@@ -112,7 +112,7 @@ class User {
    * */
   static logout(data, callback) {
     createRequest({
-      url: this.URL + "/logout",
+      url: this.url + "/logout",
       method: "POST",
       responseType: "json",
       data,

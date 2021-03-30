@@ -9,10 +9,10 @@ class Account extends Entity {
    * */
 
   static url = "/account";
-  static get(id = '', callback) {
+  //static get(id = '', callback) {
+  static get(id = "", callback) {
     let innerData = {};
-    innerData.url = this.url;
-    innerData.id = id;
+    innerData.url = `${this.url}/${id}`;
     innerData.responseType = 'json';
     innerData.callback = callback;
     innerData.method = 'GET';
