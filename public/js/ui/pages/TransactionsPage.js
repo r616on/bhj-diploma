@@ -1,5 +1,6 @@
 
 
+
 /**
  * Класс TransactionsPage управляет
  * страницей отображения доходов и
@@ -25,6 +26,12 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
+    if (localStorage.lastOptions) {
+      const lastOptions = JSON.parse(localStorage.lastOptions);
+      this.render(lastOptions);
+    } else {
+      this.render();
+    }
 
   }
 
@@ -57,7 +64,11 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
+    if (localStorage.lastOptions) {
 
+      Account.remove();
+
+    }
   }
 
   /**
@@ -78,16 +89,17 @@ class TransactionsPage {
    * */
   render(options) {
     if (options) {
-      localStorage.lastOptions = options;
+      localStorage.lastOptions = JSON.stringify(options);
       Account.get([options.account_id], (err, response) => {
-        //console.log(response);
+
         if (response.success && response.data) {
-          this.renderTitle();
+          this.renderTitle(response.data.name);
         }
       });
-      Transaction.list([options.account_id], (err, response) => {
-        console.log(response);
-      })
+      Transaction.list(options, (err, response) => {
+        console.log("3333");
+        this.renderTransactions(response.data);
+      });
 
     }
 
@@ -99,14 +111,17 @@ class TransactionsPage {
    * Устанавливает заголовок: «Название счёта»
    * */
   clear() {
-
+    TransactionsPage.renderTransactions({})
+    renderTitle("Название счета1")
   }
 
   /**
    * Устанавливает заголовок в элемент .content-title
    * */
   renderTitle(name) {
-
+    const title = this.element.querySelector(".content-title");
+    title.innerText = name;
+    localStorage.removeItem(lastOptions);
   }
 
   /**
@@ -114,7 +129,29 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date) {
-
+    let data = date.trim();
+    let dataArr = data.split('');
+    let day = dataArr[8] + dataArr[9];
+    let ear = dataArr[0] + dataArr[1] + dataArr[2] + dataArr[3];
+    let month = dataArr[5] + dataArr[6];
+    const mounthArr = [
+      "Январь",
+      "Февраль",
+      "Март",
+      "Апрель",
+      "Май",
+      "Июнь",
+      "Июль",
+      "Август",
+      "Сентябрь",
+      "Октябрь",
+      "Ноябрь",
+      "Декабрь",
+    ];
+    month = mounthArr[+month - 1];
+    let hour = dataArr[11] + dataArr[12];
+    let minut = dataArr[14] + dataArr[15];
+    return `${day} ${month} ${ear} г. в ${hour}:${minut}`
   }
 
   /**
@@ -122,6 +159,38 @@ class TransactionsPage {
    * item - объект с информацией о транзакции
    * */
   getTransactionHTML(item) {
+    let type;
+    if (item.type === "income") {
+      type = "transaction_income";
+    } else {
+      type = "transaction_expense";
+    }
+    let transactionHTML = document.createElement('div');
+    transactionHTML.className = `transaction ${type} row`;
+    transactionHTML.innerHTML = `<div class="col-md-7 transaction__details">
+                                   <div class="transaction__icon">
+                                      <span class="fa fa-money fa-2x"></span>
+                                   </div>
+                                   <div class="transaction__info">
+                                     <h4 class="transaction__title">${item.name}</h4>
+                                        <!-- дата -->
+                                       <div class="transaction__date">${this.formatDate(item.created_at)}</div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <div class="transaction__summ">
+                                        <!--  сумма -->
+                                         200 <span class="currency">${item.sum}₽</span>
+                                      </div>
+                                    </div>
+                                 <div class="col-md-2 transaction__controls">
+                                    <!-- в data-id нужно поместить id -->
+                                   <button class="btn btn-danger transaction__remove" data-id="${item.id}">
+                                    <i class="fa fa-trash"></i>  
+                                   </button>
+                                  </div>`
+
+
 
   }
 
@@ -130,6 +199,13 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data) {
-
+    console.log("111");
+    const content = this.element.querySelector(".content");
+    data.forEach((item) => {
+      content.append(this.getTransactionHTML(item));
+    })
   }
 }
+// const trans = new TransactionsPage;
+// trans.formatDate("2019-07-10 03:20:41");
+// //C.formatDate("2019-03-10 03:20:41");

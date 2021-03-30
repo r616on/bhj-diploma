@@ -43,6 +43,11 @@
       "name": "Соревновательный",
       "user_id": "1",
       "id": "g2pcc72wkmv1rfra"
+    },
+    {
+      "name": "Сбербанк",
+      "user_id": "g2pcc9hokmuok2m5",
+      "id": "g2pccj00kmw1tetv"
     }
   ],
   "transactions": [
@@ -261,6 +266,96 @@
       "account_id": "1",
       "user_id": "1",
       "created_at": "2021-03-30T12:01:40.895Z"
+    },
+    {
+      "id": "g2pccfrkkmvzxhu5",
+      "type": "income",
+      "name": "На танк",
+      "sum": 34500,
+      "account_id": "g2pccg2wkmuyflkc",
+      "user_id": "1",
+      "created_at": "2021-03-30T12:28:14.092Z"
+    },
+    {
+      "id": "g2pcchnckmvzyptu",
+      "type": "expense",
+      "name": "на самолет",
+      "sum": 678000,
+      "account_id": "g2pccg2wkmuyflkc",
+      "user_id": "1",
+      "created_at": "2021-03-30T12:29:11.105Z"
+    },
+    {
+      "id": "g2pcc3k4kmw0izmr",
+      "type": "income",
+      "name": "Роман",
+      "sum": 987,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T12:44:56.930Z"
+    },
+    {
+      "id": "g2pcc48skmw1p5y3",
+      "type": "income",
+      "name": "Аркада",
+      "sum": 2323,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T13:17:44.666Z"
+    },
+    {
+      "id": "g2pcc8ugkmw1tp88",
+      "type": "income",
+      "name": "Зарплата",
+      "sum": 15000,
+      "account_id": "g2pccj00kmw1tetv",
+      "user_id": "g2pcc9hokmuok2m5",
+      "created_at": "2021-03-30T13:21:16.279Z"
+    },
+    {
+      "id": "g2pcchxokmw1ui75",
+      "type": "expense",
+      "name": "Комуналка",
+      "sum": 5000,
+      "account_id": "g2pccj00kmw1tetv",
+      "user_id": "g2pcc9hokmuok2m5",
+      "created_at": "2021-03-30T13:21:53.824Z"
+    },
+    {
+      "id": "g2pccd78kmw603wx",
+      "type": "income",
+      "name": "Командный бой",
+      "sum": 987,
+      "account_id": "g2pccj00kmw1tetv",
+      "user_id": "g2pcc9hokmuok2m5",
+      "created_at": "2021-03-30T15:18:13.712Z"
+    },
+    {
+      "id": "g2pccgskkmw65y96",
+      "type": "income",
+      "name": "Роман",
+      "sum": 344,
+      "account_id": "g2pccj00kmw1tetv",
+      "user_id": "g2pcc9hokmuok2m5",
+      "created_at": "2021-03-30T15:22:46.313Z"
+    },
+    {
+      "id": "g2pccjogkmw689iq",
+      "type": "income",
+      "name": "Командный бой",
+      "sum": 3000,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T15:24:34.225Z"
+    },
+    {
+      "id": "g2pccexokmw69rid",
+      "type": "income",
+      "name": "Командный бой",
+      "sum": 2323,
+      "account_id": "1",
+      "user_id": "1",
+      "created_at": "2021-03-30T15:25:44.196Z"
     }
   ]
 }

@@ -16,7 +16,7 @@ class Entity {
     innerData.responseType = 'json';
     innerData.callback = callback;
     innerData.method = 'GET';
-    createRequest(innerData);
+    return createRequest(innerData);
   }
 
   /**
@@ -25,15 +25,15 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
-    console.log(data);
     let innerData = {};
     innerData.url = this.url;
     innerData.data = data;
     innerData.responseType = 'json';
     innerData.callback = callback;
     innerData.method = 'PUT';
-    createRequest(innerData);
+    return createRequest(innerData);
   }
+
 
   /**
    * Удаляет информацию о счёте или доходе/расходе
@@ -46,7 +46,7 @@ class Entity {
     innerData.responseType = 'json';
     innerData.callback = callback;
     innerData.method = 'DELETE';
-    createRequest(innerData);
+    return createRequest(innerData);
   }
 }
 
