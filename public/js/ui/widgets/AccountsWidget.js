@@ -57,7 +57,7 @@ class AccountsWidget {
    * */
   update() {
     if (User.current()) {
-      Account.list([User.current().id], (e, response) => {
+      Account.list(User.current().id, (e, response) => {
         this.clear();
         this.renderItem(response.data);
       });
@@ -92,6 +92,7 @@ class AccountsWidget {
       accountArr[index].classList.remove("active");
     };
     element.classList.add("active");
+    App.showPage('transactions', { account_id: element.dataset.id });
   }
 
   /**
